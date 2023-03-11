@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:student_database_hive/db/db_functions.dart';
-import 'package:student_database_hive/db/db_model.dart';
-import 'package:student_database_hive/screens/home_screen.dart';
+import 'package:student_database_hive/controllers/functions_and_variables.dart';
+import 'package:student_database_hive/models/db_model.dart';
+import 'package:student_database_hive/views/screens/home_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main(List<String> args) async {

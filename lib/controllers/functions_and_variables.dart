@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:student_database_hive/db/db_model.dart';
+import 'package:student_database_hive/models/db_model.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -38,6 +38,11 @@ class DbNotifier extends ChangeNotifier {
   int? studentId;
 
   bool edit = false;
+
+  set setEdit(val) {
+    edit = val;
+    notifyListeners();
+  }
 
   pageInitialize(id) {
     studentName = studentList[id].name;

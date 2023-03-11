@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:student_database_hive/db/db_functions.dart';
-import 'package:student_database_hive/db/db_model.dart';
+import 'package:student_database_hive/controllers/functions_and_variables.dart';
+import 'package:student_database_hive/models/db_model.dart';
 
 class AddStudentPage extends StatelessWidget {
   AddStudentPage({super.key});
