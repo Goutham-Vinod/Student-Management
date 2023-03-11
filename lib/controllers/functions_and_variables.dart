@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:student_database_hive/models/db_model.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -41,6 +42,37 @@ class DbNotifier extends ChangeNotifier {
 
   set setEdit(val) {
     edit = val;
+    notifyListeners();
+  }
+
+  // student details functions
+
+  getImageFromCamera() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image != null) {
+        dpImage = File(image.path);
+        imagePath = image.path;
+      }
+    } catch (e) {
+      // print("Error at getImageFromCamera");
+    }
+    notifyListeners();
+  }
+
+  getImageFromGallery() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        // setState(() {
+        dpImage = File(image.path);
+
+        imagePath = image.path;
+        // });
+      }
+    } catch (e) {
+      // print("Error at getImageFromCamera");
+    }
     notifyListeners();
   }
 

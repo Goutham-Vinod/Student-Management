@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:student_database_hive/controllers/functions_and_variables.dart';
 import 'package:student_database_hive/models/db_model.dart';
 import 'package:student_database_hive/views/screens/home_screen.dart';
-import 'package:student_database_hive/controllers/common_functions.dart';
 
 class StudentDetailsPage extends StatelessWidget {
   StudentDetailsPage({
@@ -53,7 +52,7 @@ class StudentDetailsPage extends StatelessWidget {
           ],
         ),
         body: Consumer<DbNotifier>(
-          builder: (context, value, child) {
+          builder: (context, dbNotiferData, child) {
             return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(30.0),
@@ -67,12 +66,12 @@ class StudentDetailsPage extends StatelessWidget {
                           color: Colors.blue,
                           shape: CircleBorder(),
                         ),
-                        child: dbNotifierProvider.studentImage != null
+                        child: dbNotiferData.studentImage != null
                             ? InkWell(
                                 onTap: () {
                                   _modalBottomSheetMenu(context);
                                 },
-                                child: dbNotifierProvider.imagePath != null
+                                child: dbNotiferData.imagePath != null
                                     ? InkWell(
                                         onTap: () {
                                           _modalBottomSheetMenu(context);
@@ -81,7 +80,7 @@ class StudentDetailsPage extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(100),
                                           child: Image.file(
-                                            File(dbNotifierProvider.imagePath!),
+                                            File(dbNotiferData.imagePath!),
                                             width: 130,
                                             height: 130,
                                             fit: BoxFit.cover,
@@ -92,8 +91,7 @@ class StudentDetailsPage extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(100),
                                         child: Image.file(
-                                          File(
-                                              dbNotifierProvider.studentImage!),
+                                          File(dbNotiferData.studentImage!),
                                           width: 130,
                                           height: 130,
                                           fit: BoxFit.cover,
@@ -102,7 +100,7 @@ class StudentDetailsPage extends StatelessWidget {
                               )
                             : CircleAvatar(
                                 radius: 60,
-                                child: dbNotifierProvider.imagePath != null
+                                child: dbNotiferData.imagePath != null
                                     ? InkWell(
                                         onTap: () {
                                           _modalBottomSheetMenu(context);
@@ -111,7 +109,7 @@ class StudentDetailsPage extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(100),
                                           child: Image.file(
-                                            File(dbNotifierProvider.imagePath!),
+                                            File(dbNotiferData.imagePath!),
                                             width: 130,
                                             height: 130,
                                             fit: BoxFit.cover,
@@ -297,7 +295,8 @@ class StudentDetailsPage extends StatelessWidget {
                     width: 300,
                     child: ElevatedButton(
                       onPressed: () {
-                        getImageFromCamera(context);
+                        Provider.of<DbNotifier>(context, listen: false)
+                            .getImageFromCamera();
                         Navigator.of(builder).pop();
                       },
                       style: ElevatedButton.styleFrom(
@@ -311,7 +310,8 @@ class StudentDetailsPage extends StatelessWidget {
                     width: 300,
                     child: ElevatedButton(
                       onPressed: () {
-                        getImageFromGallery(context);
+                        Provider.of<DbNotifier>(context, listen: false)
+                            .getImageFromGallery();
                         Navigator.of(builder).pop();
                       },
                       style: ElevatedButton.styleFrom(
